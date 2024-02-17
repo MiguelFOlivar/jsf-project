@@ -1,10 +1,36 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html">
-	<h:head>
+<h:head>
 	<title>Pantalla principal</title>
-	</h:head>
-	<h:body>
+	<h:outputStylesheet library="css" name="styles.css"></h:outputStylesheet>
+</h:head>
+<h:body>
 	<h:outputLabel value="Bienvenido a la pantalla principal"></h:outputLabel>
-	</h:body>
+</h:body>
+<h:dataTable id="tblEmpleados" var="e" value="#{principalController.empleados}" headerClass="headerTable"
+rowClasses="rowTable rowTableLine">
+	<h:column>
+		<f:facet name="header">Nombre</f:facet>
+		<h:outputText value="#{e.nombre}" ></h:outputText>
+	</h:column>
+	<h:column>
+		<f:facet name="header">Primer Apellido</f:facet>
+		<h:outputText value="#{e.primerApellido}"></h:outputText>
+	</h:column>
+	<h:column>
+		<f:facet name="header">Segundo Apellido</f:facet>
+		<h:outputText value="#{e.segundoApellido}"></h:outputText>
+	</h:column>
+	<h:column>
+		<f:facet name="header">Puesto</f:facet>
+		<h:outputText value="#{e.puesto}"></h:outputText>
+	</h:column>
+	<h:column>
+		<f:facet name="header">Estado</f:facet>
+		<h:outputText value="HABILITADO" rendered="#{e.estatus}"></h:outputText>
+		<h:outputText value="INHABILITADO" rendered="#{!e.estatus}"></h:outputText>
+	</h:column>
+
+</h:dataTable>
 </html>

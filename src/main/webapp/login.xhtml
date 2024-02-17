@@ -1,27 +1,35 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-<h:outputStylesheet library="css" name="styles.css"></h:outputStylesheet>
+	<!--  <h:outputStylesheet library="css" name="styles.css"></h:outputStylesheet> -->
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
 </h:head>
 <h:body>
+	<div class="ui-fluid">
+		<h:form id="formLogin">
+		<p:growl id="growl"/>
+			<p:panel id="pnlLogin" header="inicio de sesión" style="text-align: center">
+			<p:graphicImage name="img/login.png" width="20%"/>
+				<p:panelGrid id="pnlGridLogin" columns="2"
+					columnClasses="ui-g-12 ui-md-4,ui-g-12 ui-md-4" layout="grid"
+					styleClass="ui-panelgrid-blank ui-fluid">
+					<p:outputLabel value="Usuario: " styleClass="colorText" for="txtUsuario"></p:outputLabel>
+					<p:inputText id="txtUsuario" value="#{loginController.usuario}"
+						required="true" requiredMessage="El usuario es requerido"></p:inputText>
 
-	<h:form id="formLogin">
-		<h:panelGrid columns="2">
-			<h:outputLabel value="Usuario: " styleClass="colorText"></h:outputLabel>
-			<h:inputText id="txtUsuario" value="#{loginController.usuario}" required="true"
-			requiredMessage="El usuario es requerido"></h:inputText>
-
-			<h:outputLabel value="Contraseña: " styleClass="colorText"></h:outputLabel>
-			<h:inputSecret id="txtPassword" value="#{loginController.password}" required="true" 
-			requiredMessage="El password es requerido"></h:inputSecret>
-
-			<h:commandButton value="entrar" action="#{loginController.ingresar}"></h:commandButton>
-		</h:panelGrid>
-
-	</h:form>
-
+					<p:outputLabel value="Contraseña: " styleClass="colorText" for="txtPassword"></p:outputLabel>
+					<p:password id="txtPassword" value="#{loginController.password}"
+						required="true" requiredMessage="El password es requerido"></p:password>
+						<p:outputLabel></p:outputLabel>
+					<p:commandButton value="entrar"
+						action="#{loginController.ingresar}" update="pnlGridLogin, growl"></p:commandButton>
+				</p:panelGrid>
+			</p:panel>
+		</h:form>
+	</div>
 </h:body>
 </html>

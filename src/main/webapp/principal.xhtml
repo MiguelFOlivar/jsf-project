@@ -2,37 +2,92 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
-	
+
 <h:head>
 	<title>Pantalla principal</title>
 	<h:outputStylesheet library="css" name="styles.css"></h:outputStylesheet>
 </h:head>
 <h:body>
-	<h:outputLabel value="Bienvenido a la pantalla principal"></h:outputLabel>
+	<!--  <h:outputLabel value="Bienvenido a la pantalla principal"></h:outputLabel> -->
 </h:body>
-<h:dataTable id="tblEmpleados" var="e" value="#{principalController.empleados}" headerClass="headerTable"
-rowClasses="rowTable rowTableLine">
-	<h:column>
-		<f:facet name="header">Nombre</f:facet>
-		<h:outputText value="#{e.nombre}" ></h:outputText>
-	</h:column>
-	<h:column>
-		<f:facet name="header">Primer Apellido</f:facet>
-		<h:outputText value="#{e.primerApellido}"></h:outputText>
-	</h:column>
-	<h:column>
-		<f:facet name="header">Segundo Apellido</f:facet>
-		<h:outputText value="#{e.segundoApellido}"></h:outputText>
-	</h:column>
-	<h:column>
-		<f:facet name="header">Puesto</f:facet>
-		<h:outputText value="#{e.puesto}"></h:outputText>
-	</h:column>
-	<h:column>
-		<f:facet name="header">Estado</f:facet>
-		<h:outputText value="HABILITADO" rendered="#{e.estatus}"></h:outputText>
-		<h:outputText value="INHABILITADO" rendered="#{!e.estatus}"></h:outputText>
-	</h:column>
+<p:outputLabel
+	value="#{sessionController.usuarioDTO.usuario}, Bienvenido a la pantalla principal"></p:outputLabel>
+<h:form>
+	<p:commandButton value="Cerrar sesión."
+		action="${sessionClosedController.cerrarSesion}"
+		styleClass="rounded-button ui-button-danger ui-button-flat"
+		icon="pi pi-times"></p:commandButton>
+	<p:dataTable reflow="true" id="tblEmpleados" var="e"
+		value="#{principalController.empleados}" stickyHeader="true"
+		stickyTopAt=".layout-topbar" stripedRows="true" paginator="true"
+		paginatorPosition="bottom" rows="10"
+		paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}
+		 {Exporters}"
+		currentPageReportTemplate="{startRecord}-{endRecord} de {totalRecords} registros"
+		rowsPerPageTemplate="5,10,{ShowAll|'All'}"
+		filteredValue="#{principalController.empleadosFiltrados}"
+		emptyMessage="No se encontraron registros">
 
-</h:dataTable>
+		<f:facet name="{Exporters}">
+			<div style="float: right; padding-top: 5px;">
+				<h:commandLink>
+					<p:graphicImage name="img/excel.png" width="24" />
+					<p:dataExporter type="xls" target="tblEmpleados"
+						fileName="reporteEmpleados" />
+				</h:commandLink>
+
+				<h:commandLink>
+					<p:graphicImage name="img/xlsx.png" width="24" />
+					<p:dataExporter type="xlsxstream" target="tblEmpleados"
+						fileName="reporteEmpleados" />
+				</h:commandLink>
+
+				<h:commandLink>
+					<p:graphicImage name="img/pdf.png" width="24" />
+					<p:dataExporter type="pdf" target="tblEmpleados"
+						fileName="reporteEmpleados" />
+				</h:commandLink>
+
+				<h:commandLink>
+					<p:graphicImage name="img/csv.png" width="24" />
+					<p:dataExporter type="csv" target="tblEmpleados"
+						fileName="reporteEmpleados" />
+				</h:commandLink>
+
+				<h:commandLink>
+					<p:graphicImage name="img/xml.png" width="24" />
+					<p:dataExporter type="xml" target="tblEmpleados"
+						fileName="reporteEmpleados" />
+				</h:commandLink>
+			</div>
+		</f:facet>
+
+
+		<p:column headerText="Nombre" filterBy="#{e.nombre}"
+			filterMatchMode="contains" sortBy="#{e.nombre}">
+			<h:outputText value="#{e.nombre}" />
+		</p:column>
+		<p:column headerText="Primer Apellido" filterBy="#{e.primerApellido}"
+			filterMatchMode="contains" sortBy="#{e.primerApellido}">
+			<h:outputText value="#{e.primerApellido}" />
+		</p:column>
+		<p:column headerText="Segundo Apellido"
+			filterBy="#{e.segundoApellido}" filterMatchMode="contains"
+			sortBy="#{e.segundoApellido}">
+			<h:outputText value="#{e.segundoApellido}" />
+		</p:column>
+		<p:column headerText="Puesto" filterBy="#{e.puesto}"
+			filterMatchMode="contains" sortBy="#{e.puesto}">
+			<h:outputText value="#{e.puesto}"></h:outputText>
+		</p:column>
+		<p:column headerText="Estatus" filterBy="#{e.estatus}"
+			filterMatchMode="contains" sortBy="#{e.estatus}">
+			<h:outputText value="HABILITADO" rendered="#{e.estatus}"></h:outputText>
+			<h:outputText value="INHABILITADO" rendered="#{!e.estatus}"></h:outputText>
+		</p:column>
+	</p:dataTable>
+</h:form>
+<h:form>
+
+</h:form>
 </html>

@@ -7,8 +7,11 @@ import java.io.IOException;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+
+import org.mfigueroa.jsfproject.dto.UsuarioDTO;
 
 /**
  * @author Miguel Figueroa Clase que permite controlar el funcionamiento de la
@@ -25,6 +28,11 @@ public class LoginController {
 	 * contraseña usada en el login
 	 */
 	private String password;
+	/**
+	 * Bean que mantiene la informacion en sesion.
+	 */
+	@ManagedProperty("#{sessionController}")
+	private SessionController sessionController;
 
 	/**
 	 * método que nos permite ingrear a la pantalla principal del login
@@ -32,10 +40,14 @@ public class LoginController {
 	public void ingresar() {
 		if (usuario.equals("mike") && password.equals("1234")) {
 			try {
+				UsuarioDTO usuarioDTO = new UsuarioDTO();
+				usuarioDTO.setUsuario(this.usuario);
+				usuarioDTO.setPassword(this.password);
+				this.sessionController.setUsuarioDTO(usuarioDTO);
 				this.redireccionar("principal.xhtml");
 			} catch (IOException e) {
 				FacesContext.getCurrentInstance().addMessage("formLogin:txtPassword",
-						new FacesMessage(FacesMessage.SEVERITY_FATAL,"La página no existe...", ""));
+						new FacesMessage(FacesMessage.SEVERITY_FATAL, "La página no existe...", ""));
 			}
 		} else {
 			FacesContext.getCurrentInstance().addMessage("formLogin:txtPassword",
@@ -75,6 +87,20 @@ public class LoginController {
 	 */
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	/**
+	 * @return the sessionController
+	 */
+	public SessionController getSessionController() {
+		return sessionController;
+	}
+
+	/**
+	 * @param sessionController the sessionController to set
+	 */
+	public void setSessionController(SessionController sessionController) {
+		this.sessionController = sessionController;
 	}
 
 }

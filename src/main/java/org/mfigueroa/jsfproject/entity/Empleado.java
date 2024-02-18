@@ -11,6 +11,7 @@ public class Empleado {
 	private String primerApellido;
 	private String segundoApellido;
 	private String puesto;
+	
 	/**
 	 * estado actual del empleado
 	 */

@@ -22,6 +22,18 @@ public class EmpleadoService {
 		empleados.add(new Empleado("Diego", "Paniagua", "RedRomero", "Senior Developer Java", true));
 		empleados.add(new Empleado("Carlos", "Santana", "Ruiz", "Architect", true));
 		empleados.add(new Empleado("Marcos", "Gutierrez", "Luna", "Web Developer", false));
+		empleados.add(new Empleado("Alberto", "Salas", "López", "Software Engineer", true));
+		empleados.add(new Empleado("Diego", "Paniagua", "RedRomero", "Senior Developer Java", true));
+		empleados.add(new Empleado("Carlos", "Santana", "Ruiz", "Architect", true));
+		empleados.add(new Empleado("Marcos", "Gutierrez", "Luna", "Web Developer", false));
+		empleados.add(new Empleado("Alberto", "Salas", "López", "Software Engineer", true));
+		empleados.add(new Empleado("Diego", "Paniagua", "RedRomero", "Senior Developer Java", true));
+		empleados.add(new Empleado("Carlos", "Santana", "Ruiz", "Architect", true));
+		empleados.add(new Empleado("Marcos", "Gutierrez", "Luna", "Web Developer", false));
+		empleados.add(new Empleado("Alberto", "Salas", "López", "Software Engineer", true));
+		empleados.add(new Empleado("Diego", "Paniagua", "RedRomero", "Senior Developer Java", true));
+		empleados.add(new Empleado("Carlos", "Santana", "Ruiz", "Architect", true));
+		empleados.add(new Empleado("Marcos", "Gutierrez", "Luna", "Web Developer", false));
 		return empleados;
 	}
 }
